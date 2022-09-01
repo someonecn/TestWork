@@ -82,7 +82,8 @@ namespace _Code_Figures
                 }
             }
         }
-
+        #region [EDITOR]
+#if UNITY_EDITOR
         public void CreateFigures()
         {
             switch (m_figureSettings._figureType)
@@ -200,6 +201,8 @@ namespace _Code_Figures
                 position.y += 1;
             }
         }
+#endif
+        #endregion
 
     }
 }
