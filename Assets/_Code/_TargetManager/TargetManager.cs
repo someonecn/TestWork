@@ -66,7 +66,6 @@ namespace _Code_TargetManager
         }
         private void ReplaceFigure(DestructableFigure obj)
         {
-            Debug.Log("Replace");
             m_position = Vector3.zero + Vector3.up * 0.5f;
 
             foreach (var item in m_destructableFigures)
