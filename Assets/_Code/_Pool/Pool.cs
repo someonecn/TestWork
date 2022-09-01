@@ -18,28 +18,28 @@ namespace _Code_Pool
 
     public class Pool : MonoBehaviour
     {
+        #region [Singleton]
         public static Pool Instance { get; private set; }
-
-        [SerializeField] private List<BulletPoolItem> _bulletsToPool = new List<BulletPoolItem>();
+        #endregion
+        [SerializeField] private List<BulletPoolItem> m_bulletsToPool = new List<BulletPoolItem>();
 
         #region [Properties]
-        private HashSet<Bullet> _pooledBullets = new HashSet<Bullet>();
-        private Transform _transform = default;
+        private HashSet<Bullet> m_pooledBullets = new HashSet<Bullet>();
+        private Transform m_transform = default;
         #endregion
         private void Awake()
         {
-
             Instance = this;
 
-            _transform = transform;
+            m_transform = transform;
 
-            _pooledBullets = new HashSet<Bullet>();
+            m_pooledBullets = new HashSet<Bullet>();
 
-            foreach (BulletPoolItem item in _bulletsToPool)
+            foreach (BulletPoolItem item in m_bulletsToPool)
             {
                 for (int i = 0; i < item._amountToPool; i++)
                 {
-                    _pooledBullets.Add(InstantiateBullet(item));
+                    m_pooledBullets.Add(InstantiateBullet(item));
                 }
             }
 
@@ -56,7 +56,7 @@ namespace _Code_Pool
 
         private Bullet InstantiateBullet(BulletPoolItem item)
         {
-            Bullet bullet = Instantiate(item._objectToPool, _transform);
+            Bullet bullet = Instantiate(item._objectToPool, m_transform);
             bullet.SetBulletParametrs(item._bulletType, item._bulletSettings);
             bullet.gameObject.SetActive(false);
             return bullet;
@@ -64,11 +64,11 @@ namespace _Code_Pool
 
         private Bullet GetBulletByType(BulletTypes bulletType)
         {
-            foreach (Bullet bullet in _pooledBullets)
+            foreach (Bullet bullet in m_pooledBullets)
             {
                 if (bullet.BulletType == bulletType)
                 {
-                    _pooledBullets.Remove(bullet);
+                    m_pooledBullets.Remove(bullet);
                     return bullet;
                 }
             }
@@ -79,7 +79,7 @@ namespace _Code_Pool
         }
         private BulletPoolItem GetBulletTypeFromList(BulletTypes bulletType)
         {
-            foreach (BulletPoolItem item in _bulletsToPool)
+            foreach (BulletPoolItem item in m_bulletsToPool)
             {
                 if (item._bulletType == bulletType)
                 {
@@ -96,13 +96,13 @@ namespace _Code_Pool
             return GetBulletByType(value);
         }
 
-        public void ReturnBulletToPool(Bullet bullet)
+        private void ReturnBulletToPool(Bullet bullet)
         {
             bullet.gameObject.SetActive(false);
 
-            if (!_pooledBullets.Contains(bullet))
+            if (!m_pooledBullets.Contains(bullet))
             {
-                _pooledBullets.Add(bullet);
+                m_pooledBullets.Add(bullet);
             }
         }
     }

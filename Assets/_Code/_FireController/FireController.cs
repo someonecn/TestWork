@@ -7,7 +7,10 @@ namespace _Code__FireController
 {
     public class FireController : MonoBehaviour
     {
-        [SerializeField] private Bullet m_bullet = default;
+        #region [Privates]
+        private Bullet m_bullet = default;
+        #endregion
+
 
         private void OnEnable()
         {

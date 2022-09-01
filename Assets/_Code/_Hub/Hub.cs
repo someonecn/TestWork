@@ -1,8 +1,6 @@
 using _Code_Bullet;
 using _Code_Figures;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Code_Hub

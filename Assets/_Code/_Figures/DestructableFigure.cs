@@ -8,13 +8,12 @@ namespace _Code_Figures
 {
     public class DestructableFigure : MonoBehaviour
     {
-        [SerializeField] private FigureSettings _figureSettings = default;
-        [SerializeField] private List<Primitive> _primitives = new List<Primitive>();
+        [SerializeField] private FigureSettings m_figureSettings = default;
+        [SerializeField] private List<Primitive> m_originalPrimitives = new List<Primitive>();
         [SerializeField] private float m_resetTimer = 5f;
 
         #region [Privates]
-        private Transform _transform = default;
-        private bool exploded = false;
+        private bool m_exploded = false;
         private HashSet<Primitive> m_primitives = new HashSet<Primitive>();
         private float m_timer = 0f;
         #endregion
@@ -22,8 +21,7 @@ namespace _Code_Figures
 
         private void Awake()
         {
-            _transform = transform;
-            foreach (var item in _primitives)
+            foreach (var item in m_originalPrimitives)
             {
                 m_primitives.Add(item);
             }
@@ -39,7 +37,8 @@ namespace _Code_Figures
 
         private void OnSystemLateUpdate(float obj)
         {
-            if (!exploded) return;
+            if (!m_exploded) return;
+
             m_timer += obj;
             if (m_timer >= m_resetTimer)
             {
@@ -54,7 +53,7 @@ namespace _Code_Figures
             {
                 item.ResetToStart();
             }
-            exploded = false;
+            m_exploded = false;
             m_timer = 0f;
             Hub.replaceFigure?.Invoke(this);
         }
@@ -67,8 +66,8 @@ namespace _Code_Figures
         }
         public void ExplodeObject(Primitive primitive, float radius)
         {
-            if (exploded) return;
-            exploded = true;
+            if (m_exploded) return;
+            m_exploded = true;
             Vector3 position = primitive.Transform.position;
             float sqrRadius = radius * radius;
             foreach (var item in m_primitives)
@@ -86,7 +85,7 @@ namespace _Code_Figures
 
         public void CreateFigures()
         {
-            switch (_figureSettings._figureType)
+            switch (m_figureSettings._figureType)
             {
                 case FigureTypes.pyramid:
                     {
@@ -103,31 +102,31 @@ namespace _Code_Figures
 
         public void DestroyFigures()
         {
-            if (_primitives.Count == 0) return;
+            if (m_originalPrimitives.Count == 0) return;
 
-            for (int i = 0; i < _primitives.Count; i++)
+            for (int i = 0; i < m_originalPrimitives.Count; i++)
             {
-                if (_primitives[i] != null)
+                if (m_originalPrimitives[i] != null)
                 {
-                    DestroyImmediate(_primitives[i].gameObject);
+                    DestroyImmediate(m_originalPrimitives[i].gameObject);
                 }
             }
 
-            _primitives.Clear();
+            m_originalPrimitives.Clear();
         }
 
         private void CreatePyramid()
         {
-            switch (_figureSettings._figureComprises)
+            switch (m_figureSettings._figureComprises)
             {
                 case FigureComprises.cube:
                     {
-                        BuildPyramid(_figureSettings._cubePrefab);
+                        BuildPyramid(m_figureSettings._cubePrefab);
                     }
                     break;
                 case FigureComprises.sphere:
                     {
-                        BuildPyramid(_figureSettings._spherePrefab);
+                        BuildPyramid(m_figureSettings._spherePrefab);
                     }
                     break;
             }
@@ -135,16 +134,16 @@ namespace _Code_Figures
 
         private void CreateCube()
         {
-            switch (_figureSettings._figureComprises)
+            switch (m_figureSettings._figureComprises)
             {
                 case FigureComprises.cube:
                     {
-                        BuildCube(_figureSettings._cubePrefab);
+                        BuildCube(m_figureSettings._cubePrefab);
                     }
                     break;
                 case FigureComprises.sphere:
                     {
-                        BuildCube(_figureSettings._spherePrefab);
+                        BuildCube(m_figureSettings._spherePrefab);
                     }
                     break;
             }
@@ -154,16 +153,16 @@ namespace _Code_Figures
         {
             Vector3 position = Vector3.zero;
 
-            for (int i = 0; i < _figureSettings._column; i++)
+            for (int i = 0; i < m_figureSettings._column; i++)
             {
-                for (int j = 0; j < _figureSettings._row; j++)
+                for (int j = 0; j < m_figureSettings._row; j++)
                 {
-                    for (int k = 0; k < _figureSettings._row; k++)
+                    for (int k = 0; k < m_figureSettings._row; k++)
                     {
                         Primitive go = PrefabUtility.InstantiatePrefab(@object, transform) as Primitive;
                         go.transform.position = position;
                         go.SetDestructableFigure(this);
-                        _primitives.Add(go);
+                        m_originalPrimitives.Add(go);
                         position.x += 1;
                     }
                     position.x = 0;
@@ -177,9 +176,9 @@ namespace _Code_Figures
         private void BuildPyramid(Primitive @object)
         {
             Vector3 position = Vector3.zero;
-            int rows = _figureSettings._row;
+            int rows = m_figureSettings._row;
             float x = 0f;
-            for (int i = 0; i < _figureSettings._column; i--)
+            for (int i = 0; i < m_figureSettings._column; i--)
             {
                 for (int j = 0; j < rows; j++)
                 {
@@ -188,7 +187,7 @@ namespace _Code_Figures
                         Primitive go = PrefabUtility.InstantiatePrefab(@object, transform) as Primitive;
                         go.transform.position = position;
                         go.SetDestructableFigure(this);
-                        _primitives.Add(go);
+                        m_originalPrimitives.Add(go);
                         position.x += 1;
                     }
                     position.x = x;

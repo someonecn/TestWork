@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 1079364973}
   - component: {fileID: 1079364972}
   m_Layer: 0
-  m_Name: '#### Fire Controller ####'
+  m_Name: Fire Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -807,7 +807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b94e2cdf9d55c48861cdaa17915ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bullet: {fileID: 0}
 --- !u!4 &1079364973
 Transform:
   m_ObjectHideFlags: 0
@@ -898,7 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da5fda8cfb2d0f4fb73eafccbafea1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletsToPool:
+  m_bulletsToPool:
   - _bulletType: 1
     _amountToPool: 10
     _objectToPool: {fileID: 7807419796184206339, guid: a9c5abf00f218b5449b8d47163605e8a, type: 3}
@@ -1045,7 +1044,7 @@ GameObject:
   - component: {fileID: 1415156346}
   - component: {fileID: 1415156345}
   m_Layer: 0
-  m_Name: '#### Input Manager ####'
+  m_Name: Input Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1091,7 +1090,7 @@ GameObject:
   - component: {fileID: 1442286233}
   - component: {fileID: 1442286232}
   m_Layer: 0
-  m_Name: '#### Target Manager ####'
+  m_Name: Target Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1109,13 +1108,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307c912882769ff4d8b66ceac8cb7765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destructable:
+  m_destructable:
   - {fileID: 6334777614738023942, guid: 0974559ff1a2c934b9c54490f7cfd9d8, type: 3}
   - {fileID: 5851703002108222857, guid: 1d96082f529307a469f2377f3ff1a4e2, type: 3}
   - {fileID: 2196695818436491717, guid: 6d2ef2baecbba854f9bb938f21b4b66c, type: 3}
   - {fileID: 4754723586137549371, guid: 9019c0e338b97b24a97370c00722aad0, type: 3}
-  _appearMinRadius: 10
-  _appearMaxRadius: 50
+  m_appearMinRadius: 20
+  m_appearMaxRadius: 60
+  m_primitivesLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!4 &1442286233
 Transform:
   m_ObjectHideFlags: 0
@@ -1157,7 +1159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1686125618}
   m_Layer: 0
-  m_Name: '#### SingleTons ####'
+  m_Name: '#### Singletons ####'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1370,7 +1372,7 @@ GameObject:
   - component: {fileID: 2040561609}
   - component: {fileID: 2040561608}
   m_Layer: 0
-  m_Name: '#### System Updated ####'
+  m_Name: System Updated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1489,7 +1491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2146699312}
   m_Layer: 0
-  m_Name: '#### Controll System ####'
+  m_Name: '#### MonoBehaviours ####'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

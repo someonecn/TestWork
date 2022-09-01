@@ -1,16 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 namespace _Code_Figures
 {
     public class Primitive : MonoBehaviour
     {
         [SerializeField] private Rigidbody m_rigidbody = default;
-        [SerializeField] private Collider m_collider = default;
         [SerializeField] private DestructableFigure m_destructableFigure = default;
 
         #region [Properties]
-        public Collider Collider => m_collider;
         public DestructableFigure DestructableFigure => m_destructableFigure;
         public Transform Transform => m_transform;
         #endregion
