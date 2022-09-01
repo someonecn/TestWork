@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b643509658daaf49a6222ea52b95bca, type: 3}
+  m_Name: PyramideCubes
+  m_EditorClassIdentifier: 
+  _figureType: 0
+  _figureComprises: 0
+  _row: 5
+  _column: 5
+  _cubePrefab: {fileID: 5517127750945940936, guid: 31aa33ef0ee2403438bfb71515fa5b89, type: 3}
+  _spherePrefab: {fileID: 6621323793301996204, guid: feb4382a17a44ad439d4b1b16c1d6af8, type: 3}
